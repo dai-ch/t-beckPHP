@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -12,7 +11,7 @@
 <body>
   <h1 class="title">FizzBuzz問題</h1>
 
-  <form action="/FizzBuzz/index.php" method="post">
+  <form method="post">
     <p class="form__title">FizzNum: <input type="text" name="fizzNum" value="" placeholder=整数値を入力してください></p>
     <p class="form__title">buzzNum: <input type="text" name="buzzNum" value="" placeholder=整数値を入力してください></p>
     <p class="form__bottom"><input type="submit" value="実行"></p>
@@ -29,40 +28,39 @@
     $fizzNumPost = $_POST['fizzNum'];
     $buzzNumPost = $_POST['buzzNum'];
 
+    //エラーメッセージ
+    $error = "整数値を入力してください<br>";
+
     //全角数字を半角にする
     $fizzNum =  mb_convert_kana($fizzNumPost, 'n');
     $buzzNum =  mb_convert_kana($buzzNumPost, 'n');
 
-    //変数の値が空かどうか
-    if (empty($fizzNum)) {
-      echo "FizzNumが空です<br>";
-    }
-    if (empty($buzzNum)) {
-      echo "buzzNumが空です<br>";
-    }
 
+    //変数の値が空かどうか
+    if (empty($fizzNum) || empty($buzzNum)) {
+      echo $error;
+      exit;
+    }
 
     //入力データが全て整数型かどうか判定する
-    if (!is_numeric($fizzNum)) {
-      echo "FizzNumに文字列が入っています<br>";
-    }
-    if (!is_numeric($buzzNum)) {
-      echo "buzzNumに文字列が入っています<br>";
+    if (!is_numeric($fizzNum) || !is_numeric($buzzNum)) {
+      echo $error;
+      exit;
     }
 
-    //小数点の有無を確認
-    if (is_float($fizzNum)) {
-      echo 'FizzNumは整数値で入力してください<br>';
+    //入力された値に小数点「.」が含まれている場合、処理を実行
+    if (strpos($fizzNum, '.') !== false) {
+      echo $error;
+      exit;
     }
-    if (is_float($buzzNum)) {
-      echo 'buzzNumは整数値で入力してください<br>';
+    if (strpos($buzzNum, '.') !== false) {
+      echo $error;
+      exit;
     }
-
 
     //int型にキャスト変換する
     $fizzNum = (int)$fizzNum;
     $buzzNum = (int)$buzzNum;
-
 
     //1~99までカウントし、2つの変数の倍数になったら値を表示
     for ($i = 1; $i < 100; $i++) {
@@ -80,7 +78,6 @@
       }
     }
   }
-
 
   ?>
 
