@@ -36,45 +36,36 @@
     $buzzNum =  mb_convert_kana($buzzNumPost, 'n');
 
 
-    //変数の値が空かどうか
+    //エラーチェック
     if (empty($fizzNum) || empty($buzzNum)) {
+      //変数の値が空かどうか
       echo $error;
-      exit;
-    }
-
-    //入力データが全て整数型かどうか判定する
-    if (!is_numeric($fizzNum) || !is_numeric($buzzNum)) {
+    } else if (!is_numeric($fizzNum) || !is_numeric($buzzNum)) {
+      //入力データが全て整数型かどうか判定する
       echo $error;
-      exit;
-    }
-
-    //入力された値に小数点「.」が含まれている場合、処理を実行
-    if (strpos($fizzNum, '.') !== false) {
+    } else if (strpos($fizzNum, '.') !== false || strpos($buzzNum, '.') !== false) {
+      //入力された値に小数点「.」が含まれている場合、処理を実行
       echo $error;
-      exit;
-    }
-    if (strpos($buzzNum, '.') !== false) {
-      echo $error;
-      exit;
-    }
+    } else {
 
-    //int型にキャスト変換する
-    $fizzNum = (int)$fizzNum;
-    $buzzNum = (int)$buzzNum;
+      //int型にキャスト変換する
+      $fizzNum = (int)$fizzNum;
+      $buzzNum = (int)$buzzNum;
 
-    //1~99までカウントし、2つの変数の倍数になったら値を表示
-    for ($i = 1; $i < 100; $i++) {
-      //fizzNumとBuzzの両方の倍数を出力
-      if ($i % $fizzNum === 0 && $i % $buzzNum === 0) {
-        echo 'FizzBuzz ' . $i . '<br>';
-      }
-      //fizzだけの倍数を出力
-      if ($i % $fizzNum === 0 && $i % $buzzNum != 0) {
-        echo 'Fizz ' . $i . '<br>';
-      }
-      //buzzだけの倍数を出力
-      if ($i % $buzzNum === 0 && $i % $fizzNum != 0) {
-        echo 'Buzz ' . $i . '<br>';
+      //1~99までカウントし、2つの変数の倍数になったら値を表示
+      for ($i = 1; $i < 100; $i++) {
+        //fizzNumとBuzzの両方の倍数を出力
+        if ($i % $fizzNum === 0 && $i % $buzzNum === 0) {
+          echo 'FizzBuzz ' . $i . '<br>';
+        }
+        //fizzだけの倍数を出力
+        if ($i % $fizzNum === 0 && $i % $buzzNum != 0) {
+          echo 'Fizz ' . $i . '<br>';
+        }
+        //buzzだけの倍数を出力
+        if ($i % $buzzNum === 0 && $i % $fizzNum != 0) {
+          echo 'Buzz ' . $i . '<br>';
+        }
       }
     }
   }
