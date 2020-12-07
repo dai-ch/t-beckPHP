@@ -36,8 +36,23 @@
     $buzzNum =  mb_convert_kana($buzzNumPost, 'n');
 
 
-    //エラーチェック
-    if (empty($fizzNum) || empty($buzzNum)) {
+    //少数を除く数値かどうかチェック
+    if (preg_match('/^[\d ()+-]+$/', $fizzNum) && preg_match('/^[\d ()+-]+$/', $buzzNum)) {
+
+      //1~99までカウントし、2つの変数の倍数になったら値を表示
+      for ($i = 1; $i < 100; $i++) {
+        //入力した2つの値の両方の倍数の倍数の値を表示
+        if ($i % $fizzNum === 0 && $i % $buzzNum === 0) {
+          echo 'FizzBuzz ' . $i . '<br>';
+        } elseif ($i % $fizzNum === 0 && $i % $buzzNum != 0) {
+          //fizzNumのみの倍数の値を表示
+          echo 'Fizz ' . $i . '<br>';
+        } else if ($i % $buzzNum === 0 && $i % $fizzNum != 0) {
+          //buzzNumのみの倍数の値を表示
+          echo 'Buzz ' . $i . '<br>';
+        }
+      }
+    } else if (empty($fizzNum) || empty($buzzNum)) {
       //変数の値が空かどうか
       echo $error;
     } else if (!is_numeric($fizzNum) || !is_numeric($buzzNum)) {
@@ -46,27 +61,6 @@
     } else if (strpos($fizzNum, '.') !== false || strpos($buzzNum, '.') !== false) {
       //入力された値に小数点「.」が含まれている場合、処理を実行
       echo $error;
-    } else {
-
-      //int型にキャスト変換する
-      $fizzNum = (int)$fizzNum;
-      $buzzNum = (int)$buzzNum;
-
-      //1~99までカウントし、2つの変数の倍数になったら値を表示
-      for ($i = 1; $i < 100; $i++) {
-        //fizzNumとBuzzの両方の倍数を出力
-        if ($i % $fizzNum === 0 && $i % $buzzNum === 0) {
-          echo 'FizzBuzz ' . $i . '<br>';
-        }
-        //fizzだけの倍数を出力
-        if ($i % $fizzNum === 0 && $i % $buzzNum != 0) {
-          echo 'Fizz ' . $i . '<br>';
-        }
-        //buzzだけの倍数を出力
-        if ($i % $buzzNum === 0 && $i % $fizzNum != 0) {
-          echo 'Buzz ' . $i . '<br>';
-        }
-      }
     }
   }
 
