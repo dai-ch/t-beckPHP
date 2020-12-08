@@ -31,13 +31,15 @@
     //エラーメッセージ
     $error = "整数値を入力してください<br>";
 
+    //正規表現
+    $match = "/^[0-9]+$/";
+
     //全角数字を半角にする
     $fizzNum =  mb_convert_kana($fizzNumPost, 'n');
     $buzzNum =  mb_convert_kana($buzzNumPost, 'n');
 
-
     //少数を除く数値かどうかチェック
-    if (preg_match('/^[\d ()+-]+$/', $fizzNum) && preg_match('/^[\d ()+-]+$/', $buzzNum)) {
+    if (preg_match($match, $fizzNum) && preg_match($match, $buzzNum)) {
 
       //1~99までカウントし、2つの変数の倍数になったら値を表示
       for ($i = 1; $i < 100; $i++) {
