@@ -54,14 +54,7 @@
           echo 'Buzz ' . $i . '<br>';
         }
       }
-    } else if (empty($fizzNum) || empty($buzzNum)) {
-      //変数の値が空かどうか
-      echo $error;
-    } else if (!is_numeric($fizzNum) || !is_numeric($buzzNum)) {
-      //入力データが全て整数型かどうか判定する
-      echo $error;
-    } else if (strpos($fizzNum, '.') !== false || strpos($buzzNum, '.') !== false) {
-      //入力された値に小数点「.」が含まれている場合、処理を実行
+    } else {
       echo $error;
     }
   }
