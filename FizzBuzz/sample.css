@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 1rem;
+}
+
+.title {
+  margin-top: 0;
+}
+
+.form__title {
+  margin: 5px 0;
+  padding: 0;
+}
+
+.form_bottom {
+  margin: 5px 0;
+  padding: 0;
+}
+/*# sourceMappingURL=sample.css.map */
